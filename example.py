@@ -2,7 +2,7 @@ import asyncio
 from spy import SPY
 
 async def main():
-    app = SPY(proxy = 'http://169.254.1.1:8080')
+    app = SPY()
 
     await app.paginate(
         'https://www.terabyteshop.com.br',
@@ -12,10 +12,10 @@ async def main():
 
     await app.get_all()
 
-    app.get_items_group('.pbox',{
+    app.get_items_group(['.pbox'],{
         'product_name': 'h2::text',
         'product_link': 'a::attr(href)',
         'product_price': '.prod-new-price span::text'
-    }).to_markdown('dataframe.md')
+    }).to_markdown('dataframe.csv')
 
 asyncio.run(main())
